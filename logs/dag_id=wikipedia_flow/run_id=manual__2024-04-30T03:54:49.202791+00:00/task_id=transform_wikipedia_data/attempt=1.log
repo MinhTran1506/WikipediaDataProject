@@ -1,0 +1,85 @@
+[2024-04-30T03:54:57.844+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-04-30T03:54:57.878+0000] {taskinstance.py:2073} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: wikipedia_flow.transform_wikipedia_data manual__2024-04-30T03:54:49.202791+00:00 [queued]>
+[2024-04-30T03:54:57.886+0000] {taskinstance.py:2073} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: wikipedia_flow.transform_wikipedia_data manual__2024-04-30T03:54:49.202791+00:00 [queued]>
+[2024-04-30T03:54:57.887+0000] {taskinstance.py:2303} INFO - Starting attempt 1 of 1
+[2024-04-30T03:54:57.897+0000] {taskinstance.py:2327} INFO - Executing <Task(PythonOperator): transform_wikipedia_data> on 2024-04-30 03:54:49.202791+00:00
+[2024-04-30T03:54:57.902+0000] {standard_task_runner.py:63} INFO - Started process 617 to run task
+[2024-04-30T03:54:57.904+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'wikipedia_flow', 'transform_wikipedia_data', 'manual__2024-04-30T03:54:49.202791+00:00', '--job-id', '12', '--raw', '--subdir', 'DAGS_FOLDER/wikipedia_flow.py', '--cfg-path', '/tmp/tmpjlzlxohn']
+[2024-04-30T03:54:57.905+0000] {standard_task_runner.py:91} INFO - Job 12: Subtask transform_wikipedia_data
+[2024-04-30T03:54:57.954+0000] {task_command.py:426} INFO - Running <TaskInstance: wikipedia_flow.transform_wikipedia_data manual__2024-04-30T03:54:49.202791+00:00 [running]> on host ab8381b78bd9
+[2024-04-30T03:54:58.255+0000] {taskinstance.py:2644} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='Minh Tran' AIRFLOW_CTX_DAG_ID='wikipedia_flow' AIRFLOW_CTX_TASK_ID='transform_wikipedia_data' AIRFLOW_CTX_EXECUTION_DATE='2024-04-30T03:54:49.202791+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-04-30T03:54:49.202791+00:00'
+[2024-04-30T03:54:58.256+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-04-30T03:55:03.357+0000] {base.py:396} INFO - Received an HTTP error (403): <html>
+<head>
+<title>Access blocked</title>
+</head>
+<body>
+<h1>Access blocked</h1>
+
+<p>You have been blocked because you have violated the
+<a href="https://operations.osmfoundation.org/policies/nominatim/">usage policy</a>
+of OSM's Nominatim geocoding service. Please be aware that OSM's resources are
+limited and shared between many users. The usage policy is there to ensure that
+the service remains usable for everybody.</p>
+
+<p>Please review the terms and make sure that your
+software adheres to the terms. You should in particular verify that you have set a
+<b>custom HTTP referrer or HTTP user agent</b> that identifies your application, and
+that you are not overusing the service with massive bulk requests.</p>
+
+<p>If you feel that this block is unjustified or remains after you have adopted
+your usage, you may contact the Nominatim system administrator at
+nominatim@openstreetmap.org to have this block lifted.</p>
+</body>
+</head>
+
+[2024-04-30T03:55:03.358+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-04-30T03:55:03.358+0000] {taskinstance.py:2890} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/geopy/geocoders/base.py", line 368, in _call_geocoder
+    result = self.adapter.get_json(url, timeout=timeout, headers=req_headers)
+  File "/home/airflow/.local/lib/python3.9/site-packages/geopy/adapters.py", line 472, in get_json
+    resp = self._request(url, timeout=timeout, headers=headers)
+  File "/home/airflow/.local/lib/python3.9/site-packages/geopy/adapters.py", line 500, in _request
+    raise AdapterHTTPError(
+geopy.adapters.AdapterHTTPError: Non-successful status code 403
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/pipelines/wikipedia_pipeline.py", line 88, in transform_wikipedia_data
+    stadiums_df['location'] = stadiums_df.apply(lambda x: get_lat_long(x['country'], x['stadium']), axis = 1)
+  File "/home/airflow/.local/lib/python3.9/site-packages/pandas/core/frame.py", line 10374, in apply
+    return op.apply().__finalize__(self, method="apply")
+  File "/home/airflow/.local/lib/python3.9/site-packages/pandas/core/apply.py", line 916, in apply
+    return self.apply_standard()
+  File "/home/airflow/.local/lib/python3.9/site-packages/pandas/core/apply.py", line 1063, in apply_standard
+    results, res_index = self.apply_series_generator()
+  File "/home/airflow/.local/lib/python3.9/site-packages/pandas/core/apply.py", line 1081, in apply_series_generator
+    results[i] = self.func(v, *self.args, **self.kwargs)
+  File "/opt/airflow/pipelines/wikipedia_pipeline.py", line 88, in <lambda>
+    stadiums_df['location'] = stadiums_df.apply(lambda x: get_lat_long(x['country'], x['stadium']), axis = 1)
+  File "/opt/airflow/pipelines/wikipedia_pipeline.py", line 74, in get_lat_long
+    location = geolocator.geocode(f'{city}, {country}')
+  File "/home/airflow/.local/lib/python3.9/site-packages/geopy/geocoders/nominatim.py", line 297, in geocode
+    return self._call_geocoder(url, callback, timeout=timeout)
+  File "/home/airflow/.local/lib/python3.9/site-packages/geopy/geocoders/base.py", line 388, in _call_geocoder
+    res = self._adapter_error_handler(error)
+  File "/home/airflow/.local/lib/python3.9/site-packages/geopy/geocoders/base.py", line 411, in _adapter_error_handler
+    raise exc_cls(str(error)) from error
+geopy.exc.GeocoderInsufficientPrivileges: Non-successful status code 403
+[2024-04-30T03:55:03.378+0000] {taskinstance.py:1205} INFO - Marking task as FAILED. dag_id=wikipedia_flow, task_id=transform_wikipedia_data, execution_date=20240430T035449, start_date=20240430T035457, end_date=20240430T035503
+[2024-04-30T03:55:03.388+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 12 for task transform_wikipedia_data (Non-successful status code 403; 617)
+[2024-04-30T03:55:03.426+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2024-04-30T03:55:03.521+0000] {taskinstance.py:3482} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-04-30T03:55:03.528+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

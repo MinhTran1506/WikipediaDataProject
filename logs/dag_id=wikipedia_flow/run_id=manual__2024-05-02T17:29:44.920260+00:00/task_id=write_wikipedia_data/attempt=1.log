@@ -1,0 +1,68 @@
+[2024-05-02T17:48:40.086+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-05-02T17:48:40.111+0000] {taskinstance.py:2073} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: wikipedia_flow.write_wikipedia_data manual__2024-05-02T17:29:44.920260+00:00 [queued]>
+[2024-05-02T17:48:40.118+0000] {taskinstance.py:2073} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: wikipedia_flow.write_wikipedia_data manual__2024-05-02T17:29:44.920260+00:00 [queued]>
+[2024-05-02T17:48:40.118+0000] {taskinstance.py:2303} INFO - Starting attempt 1 of 1
+[2024-05-02T17:48:40.128+0000] {taskinstance.py:2327} INFO - Executing <Task(PythonOperator): write_wikipedia_data> on 2024-05-02 17:29:44.920260+00:00
+[2024-05-02T17:48:40.132+0000] {standard_task_runner.py:63} INFO - Started process 1324 to run task
+[2024-05-02T17:48:40.134+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'wikipedia_flow', 'write_wikipedia_data', 'manual__2024-05-02T17:29:44.920260+00:00', '--job-id', '9', '--raw', '--subdir', 'DAGS_FOLDER/wikipedia_flow.py', '--cfg-path', '/tmp/tmp7l39_onq']
+[2024-05-02T17:48:40.135+0000] {standard_task_runner.py:91} INFO - Job 9: Subtask write_wikipedia_data
+[2024-05-02T17:48:40.177+0000] {task_command.py:426} INFO - Running <TaskInstance: wikipedia_flow.write_wikipedia_data manual__2024-05-02T17:29:44.920260+00:00 [running]> on host ac73955389ba
+[2024-05-02T17:48:40.327+0000] {taskinstance.py:2644} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='Minh Tran' AIRFLOW_CTX_DAG_ID='wikipedia_flow' AIRFLOW_CTX_TASK_ID='write_wikipedia_data' AIRFLOW_CTX_EXECUTION_DATE='2024-05-02T17:29:44.920260+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-05-02T17:29:44.920260+00:00'
+[2024-05-02T17:48:40.328+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-05-02T17:48:40.475+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-05-02T17:48:40.476+0000] {taskinstance.py:2890} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/pipelines/wikipedia_pipeline.py", line 144, in write_wikipedia_data
+    data.to_csv('abfs://' + filename, storage_options=storage_options, index=False)
+  File "/home/airflow/.local/lib/python3.9/site-packages/pandas/util/_decorators.py", line 333, in wrapper
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/pandas/core/generic.py", line 3967, in to_csv
+    return DataFrameRenderer(formatter).to_csv(
+  File "/home/airflow/.local/lib/python3.9/site-packages/pandas/io/formats/format.py", line 1014, in to_csv
+    csv_formatter.save()
+  File "/home/airflow/.local/lib/python3.9/site-packages/pandas/io/formats/csvs.py", line 270, in save
+    self._save()
+  File "/home/airflow/.local/lib/python3.9/site-packages/pandas/io/common.py", line 157, in __exit__
+    self.close()
+  File "/home/airflow/.local/lib/python3.9/site-packages/pandas/io/common.py", line 144, in close
+    handle.close()
+  File "/home/airflow/.local/lib/python3.9/site-packages/adlfs/spec.py", line 1996, in close
+    super().close()
+  File "/home/airflow/.local/lib/python3.9/site-packages/fsspec/spec.py", line 1932, in close
+    self.flush(force=True)
+  File "/home/airflow/.local/lib/python3.9/site-packages/fsspec/spec.py", line 1798, in flush
+    self._initiate_upload()
+  File "/home/airflow/.local/lib/python3.9/site-packages/fsspec/asyn.py", line 118, in wrapper
+    return sync(self.loop, func, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/fsspec/asyn.py", line 103, in sync
+    raise return_result
+  File "/home/airflow/.local/lib/python3.9/site-packages/fsspec/asyn.py", line 56, in _runner
+    result[0] = await coro
+  File "/home/airflow/.local/lib/python3.9/site-packages/adlfs/spec.py", line 2075, in _async_initiate_upload
+    await self.container_client.delete_blob(self.blob)
+  File "/home/airflow/.local/lib/python3.9/site-packages/azure/core/tracing/decorator_async.py", line 77, in wrapper_use_tracer
+    return await func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/azure/storage/blob/aio/_container_client_async.py", line 1044, in delete_blob
+    blob = self.get_blob_client(blob) # type: ignore
+  File "/home/airflow/.local/lib/python3.9/site-packages/azure/storage/blob/aio/_container_client_async.py", line 1439, in get_blob_client
+    return BlobClient(
+  File "/home/airflow/.local/lib/python3.9/site-packages/azure/storage/blob/aio/_blob_client_async.py", line 133, in __init__
+    super(BlobClient, self).__init__(
+  File "/home/airflow/.local/lib/python3.9/site-packages/azure/storage/blob/_blob_client.py", line 175, in __init__
+    raise ValueError("Please specify a container name and blob name.")
+ValueError: Please specify a container name and blob name.
+[2024-05-02T17:48:40.490+0000] {taskinstance.py:1205} INFO - Marking task as FAILED. dag_id=wikipedia_flow, task_id=write_wikipedia_data, execution_date=20240502T172944, start_date=20240502T174840, end_date=20240502T174840
+[2024-05-02T17:48:40.500+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 9 for task write_wikipedia_data (Please specify a container name and blob name.; 1324)
+[2024-05-02T17:48:40.547+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2024-05-02T17:48:40.562+0000] {taskinstance.py:3482} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-05-02T17:48:40.564+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

@@ -1,0 +1,11 @@
+[2024-05-02T16:01:23.820+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-05-02T16:01:23.861+0000] {taskinstance.py:2073} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: wikipedia_flow.transform_wikipedia_data manual__2024-05-02T16:01:13.228158+00:00 [queued]>
+[2024-05-02T16:01:23.871+0000] {taskinstance.py:2073} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: wikipedia_flow.transform_wikipedia_data manual__2024-05-02T16:01:13.228158+00:00 [queued]>
+[2024-05-02T16:01:23.871+0000] {taskinstance.py:2303} INFO - Starting attempt 1 of 1
+[2024-05-02T16:01:23.885+0000] {taskinstance.py:2327} INFO - Executing <Task(PythonOperator): transform_wikipedia_data> on 2024-05-02 16:01:13.228158+00:00
+[2024-05-02T16:01:23.892+0000] {standard_task_runner.py:63} INFO - Started process 156 to run task
+[2024-05-02T16:01:23.895+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'wikipedia_flow', 'transform_wikipedia_data', 'manual__2024-05-02T16:01:13.228158+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/wikipedia_flow.py', '--cfg-path', '/tmp/tmpvw7m86i3']
+[2024-05-02T16:01:23.896+0000] {standard_task_runner.py:91} INFO - Job 3: Subtask transform_wikipedia_data
+[2024-05-02T16:01:23.960+0000] {task_command.py:426} INFO - Running <TaskInstance: wikipedia_flow.transform_wikipedia_data manual__2024-05-02T16:01:13.228158+00:00 [running]> on host 18690b287db4
+[2024-05-02T16:01:24.148+0000] {taskinstance.py:2644} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='Minh Tran' AIRFLOW_CTX_DAG_ID='wikipedia_flow' AIRFLOW_CTX_TASK_ID='transform_wikipedia_data' AIRFLOW_CTX_EXECUTION_DATE='2024-05-02T16:01:13.228158+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-05-02T16:01:13.228158+00:00'
+[2024-05-02T16:01:24.149+0000] {taskinstance.py:430} INFO - ::endgroup::
