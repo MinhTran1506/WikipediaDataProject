@@ -4,9 +4,14 @@ This Python-based project crawls data from Wikipedia using Requests and Beautifu
 
 ## Table of Contents
 
-1. [System Architecture]()
+1. [System Architecture](#system-architecture)
+2. [Requirements](#requirements)
+3. [Getting Started](#getting-started)
+4. [Running the Code With Docker](#running-the-code-with-docker)
+5. [How It Works](#how-it-works)
+6. [Dashboard For The Data](#dashboard-for-the-data)
 
-## System Architecture)
+## System Architecture
 ![system_architecture.png](assets%2Fsystem_architecture.png)
 
 ## Requirements
